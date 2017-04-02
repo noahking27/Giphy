@@ -19,7 +19,7 @@
 
 <input id="submitButton" class="btn btn-default" type="submit" value="Submit">
 
-<div id="gifHere"></div>
+<button id="gifHere"></button>
 
 
 
@@ -27,5 +27,20 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script type="text/javascript" src="javascript/giphy.js"></script>
+
+  <script type="text/javascript">
+    $(".gifs").on("click", function() {
+
+      var state = $(this).attr("data-state");
+    
+      if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+      } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+      }
+    });
+  </script>
 </body>
 </html>

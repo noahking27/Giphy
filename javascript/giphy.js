@@ -20,7 +20,7 @@ $("#buttonsHere").click(function(animalclick){
 	/*var testing = $(event.target).text();*/
 	/*$("#submitButton").on("click", function() {*/
     var imageUrl = ''
-	var queryURL ="http://api.giphy.com/v1/gifs/search?q=" + $(event.target).text() + "&api_key=dc6zaTOxFJmzC";
+	var queryURL ="http://api.giphy.com/v1/gifs/search?q=" + $(event.target).text() + "&limit=9&api_key=dc6zaTOxFJmzC";
 
 	$.ajax({
 		url: queryURL,
@@ -29,30 +29,49 @@ $("#buttonsHere").click(function(animalclick){
 
 	.done(function(response){
 
-		console.log(response.data);
+		
 
 		for(var i = 0; i < response.data.length; i++){
 
-			imageUrl = response.data[i].images.downsized_still.url;
-			var gifImage = $("<img>");
+			imageUrlStill = response.data[i].images.downsized_still.url;
+			ImageAnimate = response.data[i].images.original.url;
+			var gifImage = $("<img class=\"gifs\">");
 
 		gifImage.attr("src", imageUrl)
 
-		$("#gifHere").append(gifImage)
+		$("#gifHere").prepend(gifImage)
 		}
 
 		// imageUrl = response.data["0"].images.downsized_still.url;
 
 
-		var gifImage = $("<img>");
+		var gifImage = $("<img class=\"gifs\">");
 
-		gifImage.attr("src", imageUrl)
+		gifImage.attr("src", imageUrlStill )
+		gifImage.attr("data-still", imageUrlStill)
+        gifImage.attr("data-animate", ImageAnimate)
+        gifImage.attr("data-state", "still")
 
-		$("#gifHere").append(gifImage)
+     
+
+		$("#gifHere").prepend(gifImage)
+
+// 		$("#gifHere").click(function(){
+//     $(this).src('clicked', true)
+ 
+// });
+
+		// if($('#gifHere').data('clicked')) {
+  //   alert('yes');
+//}
+
 	});
 
 
 
 // }); 
 });
+
+
+
 
